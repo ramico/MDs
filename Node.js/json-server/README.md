@@ -15,4 +15,6 @@
  * **Sort and order** use properties _sort=[...fields]&_order=[...orderAbbreviation]
  * **Pagination** _page=result*10 can be paired with _limit per page
 
- > If _limit was used alone (without _page) it's like `SELECT TOP # FROM json`
+ > ### Notes  
+ > * you can filter id on a rout param  
+ > * If _limit was used alone (without _page) it's like `SELECT TOP # FROM json`
