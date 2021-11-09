@@ -9,7 +9,10 @@
  "serve-json": "json-server --watch [file]"
  ```
 
- ## Filtering and sorting using query string
+ ## Options using query string
 
- * **Filtering** type the *fieldName1=value&fieldName2=value*
+ * **Filter** type *fieldName1=value&fieldName2=value*
  * **Sort and order** use properties _sort=[...fields]&_order=[...orderAbbreviation]
+ * **Pagination** _page=result*10 can be paired with _limit per page
+
+ > If _limit was used alone (without _page) it's like `SELECT TOP # FROM json`
