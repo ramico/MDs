@@ -19,13 +19,13 @@
 
 ## Installation 2 methods
 
-* Using **npx** recommended 
+* Using **npx** recommended
 
 1. `npx create-react-app my-app` app name should be in lowercase
 1. Make my-app the current directory `cd my-app`
 1. `npm start`
 
-* Using **npm** recommended 
+* Using **npm**
 
 1. `npm -g create-react-app` install this package globally
 1. `create-react-app my-app` app name should be in lowercase`
