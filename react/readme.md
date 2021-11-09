@@ -76,7 +76,7 @@
 
 ## props and states
 
-- | props | states
+\- | props | states
 --- | --- | ---
 Declared | Are passed to the component | are manages in the component
 Changeability | read-only | can be changes in component body
