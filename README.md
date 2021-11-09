@@ -1,2 +1,2 @@
 # MDs
- This repo wont have code just readme.md files
+ This repo wonr have code just readme.md files

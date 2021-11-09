@@ -96,8 +96,8 @@
 > **if elements where objects *references are copied***  
 >  
 > **functions find and filter**  
-> `find(e => /* condition */ )` // get the element matching the condition  
-> `filter(e => /* condition */ )` // get the element(s) that matching the condition
+> `find((e)=> /* condition */ )` // get the element matching the condition  
+> `filter((e)=> /* condition */ )` // get the element(s) that matching the condition
 
 ### Middleware
 
@@ -162,9 +162,9 @@ Steps:
     // or
     router.rout('/').get(fn1).post(fn1); // ... watch what you want to do 
     ```
-* Controller file 
+* controller file 
 
-    ``` js
+    ``` javascript
     const fn1 = (req,res) => {
         // ...
     }
