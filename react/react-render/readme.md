@@ -2,6 +2,12 @@
 
 When and how React chooses to render components
 
+## Ways to cause rerender
+
+* Components call `useState() or useReducer()` to changer their state or dispatch actions
+* When parent component rerenders
+* When using context
+
 > **Note**: If strict mode enabled render happen twice in development mode
 
 ## one JSX element with a scalar value
