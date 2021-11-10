@@ -1,4 +1,4 @@
-# A project for learning *node.js and express.js* 
+# Node.js and Express.js
 
 Here we'll start publishing stuff  questions and improvements on regular basses
 
@@ -175,16 +175,3 @@ Chapter notes well be added here each chapter with a reference number
     >   * `ready` happens after open  
     >   * `error` may occur   
     >   * `data` do what ever you want with *it's arg from callback*
-
-## Usage 
-
-Read understand and develop
-
-note: codes will be added to branches ***unmerged***
-unless it's a basic setup
-
-## Contributing 
-I **@ramico** mainly *will* be publishing stuff
-
-## License 
-<ins>nil</ins>
