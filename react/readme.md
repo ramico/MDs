@@ -56,7 +56,7 @@
 * Functional *a function that returns a component **one root***
 
     ``` jsx
-    const Component = () => <h1>Hello world</h1>
+    const Component = () => <h1>Hello world!</h1>
     ```
 
 
@@ -67,7 +67,7 @@
     > also override it's *render* function that returns the component  
     > ### Declaration  
     > ``` jsx  
-    >  // use rce react snippet om vscode
+    >  // Use rcc react snippet om vscode
     > class Component extends React.Component {  
     > render = () => <h1>Hello world!</h1>;
     > }  
@@ -75,21 +75,92 @@
 
 **this** keyword used for class components unused for functional components
 
-> ### life-cycle stages class components  
-> * Mounted: when the component is mounter to the dom  
+## life-cycle stages class components
+
+> * Mounted: when the component is mounted to the DOM  
 > * Updated: when the component gets rerendered  
-> * Unmounted: when the components gets removed from the dom  
+> * Unmounted: when the components gets removed from the DOM  
 > * Error handling: which may occur in  
 >   * Duding mounting  
 >   * from the life-cycle  
 >   * from the constructor  
->   * from it's children
+>   * from it's children  
+
+### Mounting methods  
+
+1. `constructor` : which will get called whenever a component is created  
+    <dl style="margin-left:25px">
+    <dt> Do </dt>
+    <dd style="margin-left:10px;color:#00A500">Initialize state with super(props) and bindEvent handlers</dd>
+    <dt> Don't </dt>
+    <dd style="margin-left:10px;color:#A50000">Cause side effect e.g HTTP request</dd>
+    </dl>
+1. <code> **static** getDerivedStateFromProps(state, props)</code>:&nbsp;When the state of the component relies on *props*
+    <dl style="margin-left:25px">
+    <dt> Don't </dt>
+    <dd style="margin-left:10px;color:#A50000">Cause side effect e.g HTTP request</dd>
+    <dt> Why static </dt>
+    <dd style="margin-left:20px">To discourage any side-effects during the render phase</dd>
+    </dl>
+1. `render()` : The only **required** method, children components lifecycle methods are also executed
+    <dl style="margin-left:25px">
+    <dt> Don't </dt>
+    <dd style="margin-left:10px;color:#A50000">Cause side effect, interact with the DOM <b>OR</b> make ajax calls</dd>
+    </dl>
+1. `componentDidMount()` : Invoked immediately after the component and all it's children have rendered
+    <dl style="margin-left:25px">
+    <dt>Do</dt>
+    <dd style="margin-left:10px;color:#00A500">Cause side effect, interact with the DOM <b>OR</b> make ajax calls</dd>
+    </dl>
+
+### Updating methods
+
+1. <code>constructor()</code>:&nbsp;Every time the component is <em>rerendered</em>
+
+1. <code>**static** getDerivedStateFromProps(state, props)</code>:&nbsp;Every time the component is <em>rerendered</em>
+    <dt>Do</dt>
+    <dd style="margin-left:10px;color:#00A500">Set the state</dd>
+    <dt>Don't</dt>
+    <dd style="margin-left:10px;color:#A50000">Cause side effect, interact with the DOM <b>OR</b> make AJAX calls</dd>
+    </dl>
+
+1. <code>shouldComponentUpdate(nextProps,nextState):boolean</code>:&nbsp; A performance optimization method detecting wither or not the component should be <em>Rerendered</em>
+    <dl style="margin-left:25px">
+    <dt>Don't</dt>
+    <dd style="margin-left:10px;color:#A50000">Cause side effect, interact with the DOM <b>OR</b> make AJAX calls</dd>
+    </dl>
+
+1. <code>render()</code>:&nbsp;same as before
+
+1. <code>getSnapshotBeforeUpdate(nextProps,nextState)?:any</code>:&nbsp; Called right before changer are reflected from the virtual DOM to the DOM
+    <dl style="margin-left:25px">
+    <dt>Do</dt>
+    <dd style="margin-left:10px;color:#00A500">Get some info from the Dom</dd>
+    <dt>Note</dt>
+    <dd style="margin-left:10px">this method returns null or a value passed as a third parameter to the next function</dd>
+    </dl>
+
+1. <code>componentDidUpdate(prevProp, prevState, snapshot?)</code>:&nbsp; Called after rendering took place
+    <dl style="margin-left:25px">
+    <dt>Do</dt>
+    <dd style="margin-left:10px;color:#00A500">Cause side effect, interact with the DOM <b>OR</b> make AJAX calls</dd>
+    </dl>
+
+### Unmounting method
+
+* <code>componentDidUnmount()</code>&nbsp;method is invoked immediately before component is destructed
+    <dl style="margin-left:25px">
+    <dt>Do</dt>
+    <dd style="margin-left:10px;color:#00A500">clean up free resources</dd>
+    <dt>Don't</dt>
+    <dd style="margin-left:10px;color:#A50000">use <code>setState</code></dd>
+    </dl>
 
 ## props and states
 
 \- | props | states
 --- | --- | ---
-Declared | Are passed to the component | are manages in the component
+Declared | Are passed to the component | are managed in the component
 Changeability | read-only | can be changes in component body
 functional access | props | useState
 Class access | this.props | this.state
@@ -108,11 +179,11 @@ Class access | this.props | this.state
 
 > #### props.children  
 > the variable is always declared reads the **JSX** child nodes  
-> if used and components has no children React discards it
+> if used and component has no children *React discards it*
 
 ## Events
 
-Class components need to bind `this` keyword and there are *four* ways for that
+Class components need to bind `this` keyword; there are *four* ways for that
 
 1. Binding in render {performance not cool}
 
@@ -142,7 +213,7 @@ Class components need to bind `this` keyword and there are *four* ways for that
     }
     ```
     
-1.  Class property as an arrow function {recommended by React}
+1.  Class property as an arrow function
 
     ``` jsx
     fn = () => {
@@ -157,22 +228,22 @@ Class components need to bind `this` keyword and there are *four* ways for that
 
 can be done in four ways 
 
-1. **if/else keywords** you cant have a branching structure within **JSX** code
+1. **if/else keywords** you can't have a branching structure within **JSX** code
 
     ``` jsx
-    render(){
+    render() {
         if(true){
-            return <>something</>
+            return <>something</>;
         } else {
-            return <>something else</>
+            return <>something else</>;
         }
     }
     ```
 
-1. **Elem var** stores the result of the branching structure
+1. **Elem var** stores the result of a branching structure
 
     ``` jsx
-    render(){
+    render() {
         let res; 
         if(true){
             res = <>something</>;
@@ -183,15 +254,15 @@ can be done in four ways
     }
     ```
 
-1. **?:** turnery operator cn be used within JSX components
+1. **?:** turnery operator can be used within JSX components
 
     ``` jsx
-    render(){
+    render() {
         return true ? <>something</> : <>something else</>;
     }
     ```
 
-1. **&&** short circuit : ise it if you have {if A} case and don't have a B
+1. **&&** short circuit: Use it if you have {if A} case and don't have a B
 
     ```jsx
     render(){
@@ -212,14 +283,14 @@ When using loops to render children be aware of adding a unique key *React prope
 
 ## Styling 
 
-styling can be applied to React in three ways
+Styling can be applied to React in three ways
 
 1. *CSS* files
 
     > By creating a typical css file good selector configuration is required  
-    > to use it just `import './file.css'`  
+    > to use it just `import './file.css'`
 
-1. inline styling 
+1. Inline styling 
 
     > React allows assigning an object to the style attribute for html components  
     > the object properties must be camelCased *DHTML*
@@ -230,16 +301,25 @@ styling can be applied to React in three ways
     1. import it `import style from 'style.module.css'`
     1. set the JSX attribute for a component `<p className={style.aClass}>`
 
-    > **Note** this method reduces css conflicts
+    > **Note** this method reduces CSS conflicts
 
 ## Forms
 
 * Values should be connected to the component state
-* to pick up values from input/textarea or a select handle the onChange event
-* use the `e` param in the event handler to pick up the value `e.target.value`
+* To pick up values from input/textarea or a select handle the onChange event
+* Use the `e` param in the event handler to pick up the value `e.target.value`
 
 > **Note** you can use either a submit button or onSubmit for event to handle the submission  
-> `e.preventDefault()` prevents the form from it default submission behavior of refreshing the page
+> `e.preventDefault()` prevents the form from it's default submission behavior of refreshing the page
 
+## PureComponent `React.PureComponent`
 
+A component that is rendered once you should make sure that neither it nor it's children gets rerendered *better to be memoized*
 
+## memo `React.memo`
+
+A function that memoizes a component from unnecessary renders 
+
+## `React.Fragment` the unrenewed component
+
+since react components should renders one root components you may either wrap the return with `<></>` **OR** React.Fragment tags the last one may use key attribute 
