@@ -91,26 +91,26 @@
 1. `constructor` : which will get called whenever a component is created  
     <dl style="margin-left:25px">
     <dt> Do </dt>
-    <dd style="margin-left:10px;color:#00A500">Initialize state with super(props) and bindEvent handlers</dd>
+    <dd style="margin-left:10px;">Initialize state with super(props) and bindEvent handlers</dd>
     <dt> Don't </dt>
-    <dd style="margin-left:10px;color:#A50000">Cause side effect e.g HTTP request</dd>
+    <dd style="margin-left:10px;">Cause side effect e.g HTTP request</dd>
     </dl>
 1. <code> **static** getDerivedStateFromProps(state, props)</code>:&nbsp;When the state of the component relies on *props*
     <dl style="margin-left:25px">
     <dt> Don't </dt>
-    <dd style="margin-left:10px;color:#A50000">Cause side effect e.g HTTP request</dd>
+    <dd style="margin-left:10px;">Cause side effect e.g HTTP request</dd>
     <dt> Why static </dt>
     <dd style="margin-left:20px">To discourage any side-effects during the render phase</dd>
     </dl>
 1. `render()` : The only **required** method, children components lifecycle methods are also executed
     <dl style="margin-left:25px">
     <dt> Don't </dt>
-    <dd style="margin-left:10px;color:#A50000">Cause side effect, interact with the DOM <b>OR</b> make ajax calls</dd>
+    <dd style="margin-left:10px;">Cause side effect, interact with the DOM <b>OR</b> make ajax calls</dd>
     </dl>
 1. `componentDidMount()` : Invoked immediately after the component and all it's children have rendered
     <dl style="margin-left:25px">
     <dt>Do</dt>
-    <dd style="margin-left:10px;color:#00A500">Cause side effect, interact with the DOM <b>OR</b> make ajax calls</dd>
+    <dd style="margin-left:10px;">Cause side effect, interact with the DOM <b>OR</b> make ajax calls</dd>
     </dl>
 
 ### Updating methods
@@ -118,16 +118,17 @@
 1. <code>constructor()</code>:&nbsp;Every time the component is <em>rerendered</em>
 
 1. <code>**static** getDerivedStateFromProps(state, props)</code>:&nbsp;Every time the component is <em>rerendered</em>
+    <dl>
     <dt>Do</dt>
-    <dd style="margin-left:10px;color:#00A500">Set the state</dd>
+    <dd style="margin-left:10px;">Set the state</dd>
     <dt>Don't</dt>
-    <dd style="margin-left:10px;color:#A50000">Cause side effect, interact with the DOM <b>OR</b> make AJAX calls</dd>
+    <dd style="margin-left:10px;">Cause side effect, interact with the DOM <b>OR</b> make AJAX calls</dd>
     </dl>
 
 1. <code>shouldComponentUpdate(nextProps,nextState):boolean</code>:&nbsp; A performance optimization method detecting wither or not the component should be <em>Rerendered</em>
     <dl style="margin-left:25px">
     <dt>Don't</dt>
-    <dd style="margin-left:10px;color:#A50000">Cause side effect, interact with the DOM <b>OR</b> make AJAX calls</dd>
+    <dd style="margin-left:10px;">Cause side effect, interact with the DOM <b>OR</b> make AJAX calls</dd>
     </dl>
 
 1. <code>render()</code>:&nbsp;same as before
@@ -135,7 +136,7 @@
 1. <code>getSnapshotBeforeUpdate(nextProps,nextState)?:any</code>:&nbsp; Called right before changer are reflected from the virtual DOM to the DOM
     <dl style="margin-left:25px">
     <dt>Do</dt>
-    <dd style="margin-left:10px;color:#00A500">Get some info from the Dom</dd>
+    <dd style="margin-left:10px;">Get some info from the Dom</dd>
     <dt>Note</dt>
     <dd style="margin-left:10px">this method returns null or a value passed as a third parameter to the next function</dd>
     </dl>
@@ -143,7 +144,7 @@
 1. <code>componentDidUpdate(prevProp, prevState, snapshot?)</code>:&nbsp; Called after rendering took place
     <dl style="margin-left:25px">
     <dt>Do</dt>
-    <dd style="margin-left:10px;color:#00A500">Cause side effect, interact with the DOM <b>OR</b> make AJAX calls</dd>
+    <dd style="margin-left:10px;">Cause side effect, interact with the DOM <b>OR</b> make AJAX calls</dd>
     </dl>
 
 ### Unmounting method
@@ -151,9 +152,22 @@
 * <code>componentDidUnmount()</code>&nbsp;method is invoked immediately before component is destructed
     <dl style="margin-left:25px">
     <dt>Do</dt>
-    <dd style="margin-left:10px;color:#00A500">clean up free resources</dd>
+    <dd style="margin-left:10px;">clean up free resources</dd>
     <dt>Don't</dt>
-    <dd style="margin-left:10px;color:#A50000">use <code>setState</code></dd>
+    <dd style="margin-left:10px;">use <code>setState</code></dd>
+    </dl>
+    
+### Error handling
+
+1. <code>**static** getDerivedStateFromError(errorObject,info)</code>
+    <dl style="margin-left:25px">
+    <dt>Do</dt>
+    <dd style="margin-left:10px;">return the state object with a boolean property set to <em>true</em></dd>
+    </dl>
+
+1. <code>componentDidCatch()</code>&nbsp; this method returns redundant details 
+    <dt>Don't</dt>
+    <dd style="margin-left:10px;"><strong>don't</strong> use this method unless you need the already <em>outputted</em> error</dd>
     </dl>
 
 ## props and states
@@ -320,6 +334,89 @@ A component that is rendered once you should make sure that neither it nor it's 
 
 A function that memoizes a component from unnecessary renders 
 
-## `React.Fragment` the unrenewed component
+## `React.Fragment` the unrendered component
 
-since react components should renders one root components you may either wrap the return with `<></>` **OR** React.Fragment tags the last one may use key attribute 
+since react components should Have one root component you may either wrap the return with `<></>` **OR** React.Fragment tags the last one may use a key attribute 
+
+## React references
+
+A way to make React select items from the dom 
+
+> ### implementations  
+> * <code> this.ref = React.createRef(); </code>  
+> * <code> this.ref = (elem=>this.ref=elem)(); </code>  
+
+### Usage
+
+Add the ref attribute to the intended component/element then access it via `this.ref.current`
+
+### Forwarding references
+
+A way to pass references to child components by just adding the component declaration function as a parameter to the `React.forward()`function **remember** to pass yjr trf to the component
+
+## `ReactDom.createPortal()`
+
+A way to pass component(s) to an element out of **React root element** use the method as `ReactDom.render`
+
+## HOC *higher order component*
+
+> **Definition** A function that takes a component as an argument returning an enhanced version of it and acts as a Parent Class
+
+### Requirements 
+
+* A functional component to be exported having a component as an argument
+* An inner component adding normal functionality sending them via attributes
+* using this functional component as a function 
+
+### Naming conventions
+
+* the HOC name starts using `With.....`
+* As normal component PascalCasing must be used
+* The argument of the outer function called `WrappedComponent`
+* The inner component must have the same name
+
+> NOTES:  
+> * in the inner component addons are passed via attributes and received via props   
+> * if `WrappedComponent` may receive props from outside add `{...this.props}` oe you wont be able to receive them  
+> * finally if you want to pass data from the `WrappedComponent` just add another argument
+
+### Example 
+
+```jsx
+//HOC file
+import React, { Component } from 'react';
+
+const WithCounter = (WrappedComponent, increase) => {
+  class WithCounter extends Component {
+    constructor(props) {
+      super(props);
+
+      this.state = {
+        count: 0,
+      };
+      this.incrementCount = this.incrementCount.bind(this);
+    }
+    incrementCount() {
+      this.setState(prev => ({ count: prev.count + increase }));
+    }
+    render() {
+      return (
+        <WrappedComponent
+          count={this.state.count}
+          incrementCount={this.incrementCount}
+          {...this.props}
+        />
+      );
+    }
+  }
+  return WithCounter;
+};
+
+export default WithCounter;
+
+// child snippiest
+export default WithCounter(HoverCounter, 5);
+```
+
+
+
