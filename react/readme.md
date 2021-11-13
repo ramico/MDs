@@ -358,65 +358,110 @@ A way to pass references to child components by just adding the component declar
 
 A way to pass component(s) to an element out of **React root element** use the method as `ReactDom.render`
 
-## HOC *higher order component*
+## sharing functionality patterns
 
-> **Definition** A function that takes a component as an argument returning an enhanced version of it and acts as a Parent Class
+1. render props
 
-### Requirements 
+    ### Steps  
+    1. Create a parent component that will pass functionality to inherit
+    1. the parent should call a props function conventionally `render`
+    1. implement the parent component in the virtual DOM passing function definition
+    
+        ```jsx  
+        <parent>
+        {(a, b) => (
+        <Child a={a} b={b} />
+        ) /*children can be passed as a function as well*/}
+        </parent>
+        ```
+    1. call the sent prop function in the Parent Definition file while rendering
 
-* A functional component to be exported having a component as an argument
-* An inner component adding normal functionality sending them via attributes
-* using this functional component as a function 
+        ```jsx
+        <>{this.props.render(a, b)}</>
+        ```
 
-### Naming conventions
+1. HOC *higher order component*
 
-* the HOC name starts using `With.....`
-* As normal component PascalCasing must be used
-* The argument of the outer function called `WrappedComponent`
-* The inner component must have the same name
+    > **Definition** A pattern that takes a component as an argument returning an enhanced version of it and acts as a Parent Class
 
-> NOTES:  
-> * in the inner component addons are passed via attributes and received via props   
-> * if `WrappedComponent` may receive props from outside add `{...this.props}` oe you wont be able to receive them  
-> * finally if you want to pass data from the `WrappedComponent` just add another argument
+    ### Requirements 
 
-### Example 
+    * A functional component to be exported having a component as an argument
+    * An inner component adding normal functionality sending them via attributes
+    * using this functional component as a function 
 
-```jsx
-//HOC file
-import React, { Component } from 'react';
+    ### Naming conventions
 
-const WithCounter = (WrappedComponent, increase) => {
-  class WithCounter extends Component {
-    constructor(props) {
-      super(props);
+    * the HOC name starts using `With.....`
+    * As normal component PascalCasing must be used
+    * The argument of the outer function called `WrappedComponent`
+    * The inner component must have the same name
 
-      this.state = {
-        count: 0,
-      };
-      this.incrementCount = this.incrementCount.bind(this);
+    > NOTES:  
+    > * in the inner component addons are passed via attributes and received via props   
+    > * if `WrappedComponent` may receive props from outside add `{...this.props}` oe you wont be able to receive them  
+    > * finally if you want to pass data from the `WrappedComponent` just add another argument
+
+    ### Example 
+
+    ```jsx
+    //HOC file
+    import React, { Component } from 'react';
+
+    const WithCounter = (WrappedComponent, increase) => {
+    class WithCounter extends Component {
+        constructor(props) {
+        super(props);
+
+        this.state = {
+            count: 0,
+        };
+        this.incrementCount = this.incrementCount.bind(this);
+        }
+        incrementCount() {
+        this.setState(prev => ({ count: prev.count + increase }));
+        }
+        render() {
+        return (
+            <WrappedComponent
+            count={this.state.count}
+            incrementCount={this.incrementCount}
+            {...this.props}
+            />
+        );
+        }
     }
-    incrementCount() {
-      this.setState(prev => ({ count: prev.count + increase }));
-    }
-    render() {
-      return (
-        <WrappedComponent
-          count={this.state.count}
-          incrementCount={this.incrementCount}
-          {...this.props}
-        />
-      );
-    }
-  }
-  return WithCounter;
-};
+    return WithCounter;
+    };
 
-export default WithCounter;
+    export default WithCounter;
 
-// child snippiest
-export default WithCounter(HoverCounter, 5);
-```
+    // child snippiest
+    export default WithCounter(HoverCounter, 5);
+    ```
+
+1. Context
+
+* A context can be passed down in the virtual DOM skipping some levels
+* to create a context `const ref = React.createContext(init)`
+* a context has two important properties **Provider** & **consumer**
+
+    > **provider** is a component may be used either with selected const name or `<contextref.provider>`  
+    > **consumer** on the other hand is where the value is deployed selected const name or `<contextref.consumer>`  
+
+* the provider passes the value prop and the consumer defines a function in it's tag with the value as an argument
+
+> ### class components  
+> you may either write below class definition `classref.contextType = context` or in the class write `static contextType = contextRef`  
+> render the context in this case using `this.context`  
+> **flows of the static approach**  
+> 1. only works in class components  
+> 1. single context
+
+> **final note** init is used when no provider exists in the upper root of the virtual DOM
+
+
+
 
 
 
