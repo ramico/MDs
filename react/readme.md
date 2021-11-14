@@ -37,9 +37,9 @@
 ### Creating and exporting
 > #### Creating  
 > To create a component you need to `import React from 'react'`  
-> components and their must use PascalCasing
+> components must use PascalCasing
 > #### Exporting  
-> * Named exports: which enforces using same export reference wrapping the imported reference with curly braces  
+> * Named exports: which enforces using the same export reference wrapping the imported reference with curly braces  
 > * Default export which allows us to pick whatever reference we choose
 
 ### Component types 
@@ -53,7 +53,7 @@
 > childNode:HTML | children which may nest many calls
 
 
-* Functional *a function that returns a component **one root***
+* Functional *a function that returns a component **one root**
 
     ``` jsx
     const Component = () => <h1>Hello world!</h1>
@@ -62,7 +62,7 @@
 
 * Class components 
 
-    > **important note**  
+    > **Important note**  
     > it should extend the `React.Component`  
     > also override it's *render* function that returns the component  
     > ### Declaration  
@@ -334,7 +334,7 @@ A component that is rendered once you should make sure that neither it nor it's 
 
 A function that memoizes a component from unnecessary renders 
 
-## `React.Fragment` the unrendered component
+## `React.Fragment` the null component
 
 since react components should Have one root component you may either wrap the return with `<></>` **OR** React.Fragment tags the last one may use a key attribute 
 
@@ -352,7 +352,7 @@ Add the ref attribute to the intended component/element then access it via `this
 
 ### Forwarding references
 
-A way to pass references to child components by just adding the component declaration function as a parameter to the `React.forward()`function **remember** to pass yjr trf to the component
+A way to pass references to child components by just adding the component declaration function as a parameter to the `React.forward()`function **remember** to pass reference to the functional component via second parameter
 
 ## `ReactDom.createPortal()`
 
