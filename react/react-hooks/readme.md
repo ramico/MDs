@@ -52,3 +52,13 @@ both prototypes are the same *used for optimization* don't over do it
 
 * useCallback use it to memoize function reference
 * useMemo use it to memoize the execution of a function
+
+## React.useRef
+
+> used for creating references from the virtual DOM  
+> referencing difficult scoped variables
+
+``` jsx
+const ref = useRef();
+// use ref.current
+```
