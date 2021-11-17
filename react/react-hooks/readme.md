@@ -11,18 +11,17 @@ Hooks are function used for functional components only and the don't you the `th
 
 ## React.useEffect Hook 
 
-In useEffect you can mix and match regarding the needs lifecycle methods
+In useEffect you can mix and match regarding the needs of lifecycle methods
 
 lifecycle method | useEffects way
 --- | ---
 render | useEffect(()=>{})
-componentDidMount | useEffect(()=>{},[]) *empty square brackets*
+componentDidMount | useEffect(()=>{}, []) *empty square brackets*
 componentDidUpdate | useEffect(()=>{},\[dependency\])
 componentWillUnmount | useEffect(()=>{*return ()=>{}*})
 
 > ### dependency  
 > A dependency is the variable by changing it's value affects the render  
-> * it may be on other function calls **watch out**  
 > * nest functions as Iffy inside the effect (easier)  
 > * setting a state in prevState callback may be an option
 
@@ -62,3 +61,8 @@ both prototypes are the same *used for optimization* don't over do it
 const ref = useRef();
 // use ref.current
 ```
+
+## custom hooks
+
+a custom hook reference should start with *use*
+the sky is the limit you can share almost all code you please 
