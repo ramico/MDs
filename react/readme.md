@@ -149,7 +149,7 @@
 
 ### Unmounting method
 
-* <code>componentDidUnmount()</code>&nbsp;method is invoked immediately before component is destructed
+* <code>componentWillUnmount()</code>&nbsp;method is invoked immediately before component is destructed
     <dl style="margin-left:25px">
     <dt>Do</dt>
     <dd style="margin-left:10px;">clean up free resources</dd>
