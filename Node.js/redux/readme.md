@@ -83,6 +83,28 @@ const logger = reduxLogger.createLogger();
 const store = createStore(reducer,applyMiddleware(logger))
 ```
 
+### Thunk middleware
+
+#### installation 
+
+`npm i redux-thunk`
+
+#### usage 
+
+> Thunk is higher order function returning a higher order function to implement async action 
+*code parts as follows*
+
+```js
+//  some imports 
+const thunk = require('redux-thunk').default
+
+// action creator
+const ac_fn = () => async dispatch => {/*say axios code dispatching many actions*/}
+
+// finally in the store 
+const store = createStore(reducer, applyMiddleware(thunk));
+```
+
 
 
 
