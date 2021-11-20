@@ -1,39 +1,64 @@
-# Redux
+# React-Redux
 
-> ## Installation  
-> is installed via `npm i redux react-redux` *2 packages*  
-> ## Deploying steps  
-> 1. instantiate the state  
-> 1. *Create the action* => {type:'NAME',data:any} **Name should be written *upper(SNAKE_CASE)***   
-> 1. *create a reducer* function to branch `action.type` for different updates  
-> 1. *create the store* `const store = createStore(reducer)`
-> 1. *Create the component* that is going to use the state as it was declared and sent via **props**  
-> 1. *Create `mapStateTOProps(state)`* function that returns the required stuff   
-> 1. *Create the mapDispatchToPropsObject* that is going to hold the related functions respectively  
-> 1. *Call the `connect(mapStateToProps?,mapDispatchToPropsObject?):InferableComponentEnhancerWithProps`* and call the returned value passing the *created component*  
-> 1. finally render the ConnectedComponent wrapped im `<Provider store={store}>`  
-> ## Notes and imports  
-> ``` js  
-> import { connect, Provider } from 'react-redux'; 
-> import { createStore } from 'redux';  
-> // connect small c; upper C would be an interface  
-> ```  
-> *Rest of the methods are customizable to your taste*  
-> ## useSelector sand useDispatch  
-> equivalent to `mspStateToProps()`,`mapDispatchToProps()`  respectively
->  
-> ``` jsx  
-> import {useSelector, useDispatch} from 'react-redux'  
-> // import your action 
-> const Component = () => {  
->   const dispatch = useDispatch();
->   const contacts = (state) => state.contacts;  
->   return (  
->       <>  
->           <p>{contacts.join(', ')}<p>  
->           <button onClick={dispatch(/*call your action*/)}>  
->           </button>  
->       </>  
->   );  } // End function  
-> ```  
-> ![SOLO certificate](https://user-images.githubusercontent.com/5300122/140267918-8b3a04be-dfdb-4424-8fef-88e9fed7e68f.jpg)
+This is what need to be done to connect redux to a react application
+
+## Packages to install
+
+need to install *2 packages* `npm i redux react-redux` 
+
+## Recommended folder structure
+
+* **redux** *containing the whole thing*
+
+    * **store.js** *the store file*
+    * **index.js** *a middleware passing action creators*
+    * **rootReducer.js** *a container of combined reducers* **this approach adds a key to the selector**
+
+    * **feathers{n}** *every feature resides in one aspect of the store*
+
+        * **featureTypes** *action types (constants needed buy the reducer and the action creator)*
+        * **featureActions** *action creators for the feature*
+        * **featureReducer** *the reducer used to transmit actions to the store*
+
+## Connecting to redux store
+
+There are two ways to do so 
+
+1. Using `connect()` : `import { connect } from 'react-redux'`
+
+    This higher order function has two *optional parameters* arbitrarily: ***Note** selector is how to reach part of the store state*
+
+    > pass the created component as a parameter to the returned function to connect it then export it  
+    > **e.g** `export default connect(mapStateToProps, mapDispatchToProps)(CreatedComponent);`
+
+    1. `mapStateToProps(state):obj` 
+
+        ```js
+        // Diffraction 
+        const mapStateToProps = ({ mappedKey: /*selector*/ });
+        ```
+
+    1. `mapDispatchToProps(dispatch):obj`
+
+        ```js
+        // Diffraction 
+        const mapDispatchToProps = dispatch => ({ mappedKey: () => dispatch(/*call action creator*/) });
+        ```
+1. Using hooks
+
+    Both comes from *react-redux* package no mapping needed
+
+    1. useSelector(state)
+
+        ```js
+        // Diffraction 
+        const returnedRef = useSelector(state => /*selector*/);
+        ```
+
+    1. useDispatch
+
+        ```js
+        // Diffraction 
+        const dispatch = useDispatch();
+        // call it by dispatch(call action creator)
+        ```
