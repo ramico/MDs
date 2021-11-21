@@ -74,11 +74,10 @@ There are two ways to do so
 
 * on the browser your using install extension *redux devtools*
 * install package `npm i redux-devtools-extension -D` on your project
-* import it in **store.js** `import { composeWithDevTools } from 'redux-devtools-extension';
-`
+* import it in **store.js** `import { composeWithDevTools } from 'redux-devtools-extension';`
 * when creating the store nest the applyMiddleware inside of `composeWithDevTools()` to debug your redux application in the browser
 
-## logger and thunk middleware *same but difference*
+## logger and thunk middleware *same but different*
 
 1. logger
 
