@@ -91,7 +91,7 @@ const store = createStore(reducer,applyMiddleware(logger))
 
 #### usage 
 
-> Thunk is higher order function returning a higher order function to implement async action 
+> Thunk is action creator returning a higher order function to implement async logic 
 *code parts as follows*
 
 ```js
@@ -104,8 +104,3 @@ const ac_fn = () => async dispatch => {/*say axios code dispatching many actions
 // finally in the store 
 const store = createStore(reducer, applyMiddleware(thunk));
 ```
-
-
-
-
-

@@ -8,7 +8,7 @@ need to install *2 packages* `npm i redux react-redux`
 
 ## Recommended folder structure
 
-* **redux** *containing the whole thing*
+* **redux** *containing the whole thing* parallel to components
 
     * **store.js** *the store file*
     * **index.js** *a middleware passing action creators*
@@ -38,12 +38,17 @@ There are two ways to do so
         const mapStateToProps = ({ mappedKey: /*selector*/ });
         ```
 
+        > This function has an additional param {ownProps} you can do logic by passing them
+
     1. `mapDispatchToProps(dispatch):obj`
 
         ```js
         // Diffraction 
         const mapDispatchToProps = dispatch => ({ mappedKey: () => dispatch(/*call action creator*/) });
         ```
+
+        > This function has an additional param {ownProps} you can do logic by passing them
+
 1. Using hooks
 
     Both comes from *react-redux* package no mapping needed
@@ -64,3 +69,22 @@ There are two ways to do so
         ```
 
 > you should wrap the components using the store with the react-redux component `Provider` passing the store prop for it 
+
+## Redux devtools extension
+
+* on the browser your using install extension *redux devtools*
+* install package `npm i redux-devtools-extension -D` on your project
+* import it in **store.js** `import { composeWithDevTools } from 'redux-devtools-extension';
+`
+* when creating the store nest the applyMiddleware inside of `composeWithDevTools()` to debug your redux application in the browser
+
+## logger and thunk middleware *same but difference*
+
+1. logger
+
+only import 'createLogger' when you want to configure it otherwise just `import logger from 'redux-logger'` passing it to `applyMiddleware`
+> make sure it's the **last** middleware in the list
+
+1. thunk 
+
+`.default` is used only for vanilla *javascript* no need to add it 
