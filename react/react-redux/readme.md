@@ -62,3 +62,5 @@ There are two ways to do so
         const dispatch = useDispatch();
         // call it by dispatch(call action creator)
         ```
+
+> you should wrap the components using the store with the react-redux component `Provider` passing the store prop for it 
