@@ -1,12 +1,6 @@
 # Express.js
 
-> **Note**  
-> the poor setup comes from the tutorial  
-> since your on *ramico/express* branch go to the express folder
-
-## learning curve
-
-### Handle requests
+## Handle requests
 
 * Using `http.createServer` from `http` you need to branch request URL
   for each and every resource as follows
@@ -70,7 +64,7 @@
         `query` | An object for query string
         `body` | json that contains posted data
 
-### Static
+## Static
 
 * express.js
 
@@ -89,7 +83,7 @@
     app.use(serveStatic('./public', { index: ['index.html', 'index.htm'] }));
     ```
 
-### something about arrays **...** operator
+## something about arrays **...** operator
 
 > used in functions as ParamArrays.  
 > used to insert container elements as a copy rather than a reference  
@@ -99,11 +93,11 @@
 > `find(e => /* condition */ )` // get the element matching the condition  
 > `filter(e => /* condition */ )` // get the element(s) that matching the condition
 
-### Middleware
+## Middleware
 
 A set of function(s) bounded to queried routs 
 
-#### query ways
+### query ways
 
 1. Adding middleware to selective routes 
 1. Inserting `app.use()` between routs
@@ -111,20 +105,20 @@ A set of function(s) bounded to queried routs
 > **Note**: the insertion ways are *procedural*  
 > **syntax** e.g: `app.use('/api/?(wordA/)wordB', [fn1(...param?), fn2])`
 
-#### middleware function prototype
+### middleware function prototype
 
 `funcRef(req, res, next)` you may either
 
 * End the route here *by branching for instance* 
 * Call next function to execute the next route
 
-### morgan 
+## morgan 
 
 install it with `npm i morgan`
 
 > This is a middleware that logs information to console check it's **[documentation](https://www.npmjs.com/package/morgan)**
 
-### HTTP request methods middleware related
+## HTTP request methods middleware related
 
 Posting data
 
@@ -133,7 +127,7 @@ Middleware | Usage | Mime/type
 `express.json()` | javascript | application/json
 `express.urlencoded({extended:false})` | form | application/x-www-form-urlencoded
 
-### Router 
+## Router 
 
 Is a way to build hierarchy for routs in a web application  
 
@@ -147,7 +141,7 @@ Steps:
 1. move the callbacks into declared function references in the controller 
 1. export and import what's needed 
 
-#### router snippets e.g 
+### router snippets e.g 
 
 * router file e.g
 
