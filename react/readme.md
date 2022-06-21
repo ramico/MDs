@@ -21,22 +21,22 @@
 
 * Using **npx** recommended 
 
-1. `npx create-react-app my-app` app name should be in lowercase
+1. `npx create-react-app my-app` app name should be in shish-kebab-casing
 1. Make my-app the current directory `cd my-app`
-1. `npm start`
+1. `npm run start`
 
-* Using **npm** recommended 
+* Using **npm**
 
 1. `npm -g create-react-app` install this package globally
 1. `create-react-app my-app` app name should be in lowercase`
 1. Make my-app the current directory `cd my-app`
-1. `npm start`
+1. `npm run start`
 
-## components 
+## Components 
 
 ### Creating and exporting
 > #### Creating  
-> To create a component you need to `import React from 'react'`  
+> To create a component you need to `import React from 'react'` for react version < 17  
 > components must use PascalCasing
 > #### Exporting  
 > * Named exports: which enforces using the same export reference wrapping the imported reference with curly braces  
@@ -73,7 +73,7 @@
     > }  
     > ```
 
-**this** keyword used for class components unused for functional components
+**this** keyword used for class components only
 
 ## life-cycle stages class components
 
@@ -81,7 +81,7 @@
 > * Updated: when the component gets rerendered  
 > * Unmounted: when the components gets removed from the DOM  
 > * Error handling: which may occur in  
->   * Duding mounting  
+>   * During mounting  
 >   * from the life-cycle  
 >   * from the constructor  
 >   * from it's children  
@@ -254,7 +254,7 @@ can be done in four ways
     }
     ```
 
-1. **Elem var** stores the result of a branching structure
+1. **Element variables** stores the result of a branching structure
 
     ``` jsx
     render() {
@@ -459,9 +459,3 @@ A way to pass component(s) to an element out of **React root element** use the m
 > 1. single context
 
 > **final note** init is used when no provider exists in the upper root of the virtual DOM
-
-
-
-
-
-
