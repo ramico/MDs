@@ -14,7 +14,7 @@ is the way in with the **js** application interacts with the store
     ```js
     const ac_doSomething = (/*...*/) => ({type:'UPPER_SNAKE',data:/*...*/})
     ```
-* flex *facebook way*
+* flux *facebook way*
 
     ```js
     const ac_doSomething = (/*...*/) => ({type:'camelCase',payload:{/*...*/}})
@@ -40,8 +40,7 @@ const reducer = (state = initialState,action) => {
 
 ### Store
 
-Is data is stored for the application use it by installing Redux `npm i redux` and importing in JS syntax `const redux = require('redux')`
-
+Is data is stored for the application use it by installing Redux `npm i redux`
 #### Responsibilities
 
 Responsibility | description
@@ -60,7 +59,7 @@ use the `store.combineReducers()` passing an object as follows *notice naming co
 const rootReducer = store.combineReducers({
     key1: reducer1,
     key2: reducer2,
-    /// choose good key names
+    // choose good key names
 });
 ```
 
@@ -72,7 +71,6 @@ Functionalities that build over the reducer; to use it add `store.applyMiddlewar
 ### logger middleware
 
 1. install it `npm i redux-logger`
-1. require it or import it
 1. call it's createLogger function and store the returned value
 1. add the value to the store 
 
